@@ -3,6 +3,15 @@
 </div>
 
 <div class="card">
-  <p><%= @cocktail.dose.description %></p>
-  <%= link_to "Edit",  %>
+  <h2>Ingredients:</h2>
+  <% @cocktail.doses.each do |dose| %>
+  <ul>
+    <li>
+      <%= dose.ingredient.name %> - <%= dose.description %> |
+      <%= link_to "Delete", dose_path(dose), method: :delete %>
+    </li>
+  </ul>
+  <% end %>
 </div>
+
+<%= link_to "Add new ingredient", new_cocktail_dose_path(@cocktail) %>
