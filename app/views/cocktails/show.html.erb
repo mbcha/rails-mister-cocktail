@@ -14,4 +14,37 @@
   <% end %>
 </div>
 
-<%= link_to "Add new ingredient", new_cocktail_dose_path(@cocktail) %>
+<div class="card">
+  <h2>Reviews:</h2>
+  <% @cocktail.reviews.each do |review| %>
+  <ul>
+    <li>
+      <%= review.title %> - <%= review.stars %>/5
+    </li>
+  </ul>
+  <% end %>
+</div>
+
+<hr>
+
+<h3>Add a new ingredient</h3>
+
+<%= simple_form_for([@cocktail, @dose]) do |f| %>
+    <%= f.association :ingredient %>
+    <%= f.input :description %>
+    <%= f.submit "Add Ingredient" %>
+<% end %>
+
+<hr>
+
+<h3>Add a new review</h3>
+
+<%= simple_form_for([@cocktail, @review]) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :stars %>
+    <%= f.submit "Add Review" %>
+<% end %>
+
+<hr>
+
+<%= link_to "Back to list", cocktails_path %>
