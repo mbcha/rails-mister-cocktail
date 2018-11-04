@@ -10,7 +10,8 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to cocktail_path(@cocktail)
     else
-      render 'cocktails/show'
+      flash[:reviews_error] = @review.error
+      redirect_to @cocktail
     end
   end
 

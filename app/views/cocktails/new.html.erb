@@ -1,18 +1,4 @@
-<%= render 'components/banner',
+<%= render 'components/banner_form',
 title: "Add a Cocktail",
 banner_img: "https://images.unsplash.com/photo-1530064161350-7824b8cdeee9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=22e0769dd17e74e43f6811717147f96d&auto=format&fit=crop&w=1350&q=80"
 %>
-
-<div class="container">
-  <div class="form">
-    <%= simple_form_for(@cocktail) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :photo %>
-    <%= f.input :photo_cache, as: :hidden %>
-    <%= f.submit %>
-    <% end %>
-  </div>
-  <div class="button">
-    <%= link_to "Back to list", cocktails_path, class: "btn btn-danger" %>
-  </div>
-</div>

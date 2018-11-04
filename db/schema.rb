@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2018_11_02_115615) do
 
   create_table "doses", force: :cascade do |t|
     t.text "description"
+    t.string "error", default: "Both the ingredient and the amount must be filled"
     t.bigint "cocktail_id"
     t.bigint "ingredient_id"
     t.datetime "created_at", null: false
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 2018_11_02_115615) do
   create_table "reviews", force: :cascade do |t|
     t.string "title"
     t.integer "stars"
+    t.string "error", default: "Both the title and the rating must be filled"
     t.bigint "cocktail_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

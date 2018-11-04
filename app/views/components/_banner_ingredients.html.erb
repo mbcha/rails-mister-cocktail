@@ -1,0 +1,43 @@
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= banner_img ? banner_img : "https://images.unsplash.com/photo-1496134732667-ae8d2853a045?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e4dd1c9106a69065ccfa21a36cfb53b1&auto=format&fit=crop&w=1350&q=80" %>');">
+  <div class="banner-content">
+    <h1><%= title %></h1>
+    <% if !@rating.nil? && @rating != 0 %>
+      <% @rating.times do %>
+        <i class="fas fa-star"></i>
+      <% end %>
+    <% end %>
+
+    <div class="content-ingredients">
+      <% @cocktail.doses.each do |dose| %>
+      <ul class="ingredients-list">
+        <li>
+          <%= dose.ingredient.name %> - <%= dose.description %>
+          <%= link_to dose_path(dose), method: :delete do %>
+          <i class="fas fa-trash-alt"></i>
+          <% end %>
+        </li>
+      </ul>
+      <% end %>
+
+      <% if flash[:doses_error] %>
+      <% flash.each do |_k, value| %>
+      <div class="alert alert-error"><%= value %></div>
+      <% end %>
+      <% end %>
+
+      <div class="btn btn-primary btn-ingredient">Add an Ingredient</div>
+
+      <div class="content-form ingredient-form hidden">
+
+
+        <%= simple_form_for([@cocktail, @dose]) do |f| %>
+        <%= f.association :ingredient %>
+        <%= f.input :description, label: "Amount" %>
+        <%= f.submit "Add", class: "btn btn-primary" %>
+        <%= link_to "Cancel", @cocktail, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

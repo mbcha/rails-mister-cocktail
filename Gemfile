@@ -69,3 +69,4 @@ gem 'cloudinary'
 gem 'carrierwave', '~> 1.2'
 
 gem 'jquery-rails'
+

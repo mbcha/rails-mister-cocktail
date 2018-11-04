@@ -10,7 +10,8 @@ class DosesController < ApplicationController
     if @dose.save
       redirect_to cocktail_path(@cocktail)
     else
-      render 'cocktails/show'
+      flash[:doses_error] = @dose.error
+      redirect_to @cocktail
     end
   end
 

@@ -1,55 +1,46 @@
-<%= render 'components/banner',
+<%= render 'components/banner_ingredients',
 title: @cocktail.name,
 banner_img: @cocktail.photo_url
 %>
 
 <div class="container">
 
-  <div class="content">
-    <div class="content-info">
-      <h2>Ingredients:</h2>
-      <% @cocktail.doses.each do |dose| %>
-      <ul>
-        <li>
-          <%= dose.ingredient.name %> - <%= dose.description %> |
-          <%= link_to "Delete", dose_path(dose), method: :delete %>
-        </li>
-      </ul>
-      <% end %>
+  <div class="reviews">
+    <div class="content-reviews">
+      <div class="review-list">
+        <h2>Reviews:</h2>
+        <ul class="list-inline">
+        <% @cocktail.reviews.each do |review| %>
+          <li>
+            <%= review.title.capitalize %> - <%= review.stars %>/5
+          </li>
+        <% end %>
+        </ul>
+      </div>
     </div>
-    <div class="content-form">
-      <h3>Add a new ingredient</h3>
 
-      <%= simple_form_for([@cocktail, @dose]) do |f| %>
-      <%= f.association :ingredient %>
-      <%= f.input :description %>
-      <%= f.submit "Add Ingredient" %>
-      <% end %>
+    <div class="add-review">
+      <div class="review-content">
+        <div class="error-message">
+          <% if flash[:reviews_error] %>
+          <% flash.each do |_k, value| %>
+          <div class="alert alert-error"><%= value %></div>
+          <% end %>
+          <% end %>
+        </div>
+        <button class="btn btn-primary btn-review">Add a review</button>
+      </div>
     </div>
-  </div>
 
-  <div class="content">
-    <div class="content-info">
-    <h2>Reviews:</h2>
-    <% @cocktail.reviews.each do |review| %>
-    <ul>
-      <li>
-        <%= review.title %> - <%= review.stars %>/5
-      </li>
-    </ul>
-    <% end %>
-    </div>
-    <div class="content-form">
-      <h3>Add a new review</h3>
-
-      <%= simple_form_for([@cocktail, @review]) do |f| %>
-      <%= f.input :title %>
-      <%= f.input :stars %>
-      <%= f.submit "Add Review" %>
-      <% end %>
+    <div class="review-form hidden">
+      <div class="review-form-spaces">
+        <%= simple_form_for([@cocktail, Review.new]) do |f| %>
+        <%= f.input :title, label: "Comment" %>
+        <%= f.input :stars, label: "Rating", collection: 1..5 %>
+        <%= f.submit "Add Review", class: "btn btn-primary review-button" %>
+        <%= link_to "Cancel", @cocktail, class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
   </div>
-
-  <%= link_to "Back to list", cocktails_path, class: "btn btn-danger" %>
-
 </div>

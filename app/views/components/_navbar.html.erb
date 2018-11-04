@@ -1,5 +1,7 @@
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
+  <%= link_to root_path do %>
   <i class="fas fa-glass-martini"></i>
+  <% end %>
   <div class="empty"></div>
   <%= link_to "Add new cocktail", new_cocktail_path, class: "btn btn-danger" %>
 </div>

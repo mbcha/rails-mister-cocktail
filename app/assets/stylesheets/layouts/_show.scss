@@ -1,6 +1,36 @@
-.content {
+body {
+  background-color: white;
+}
+.reviews {
   display: flex;
   justify-content: space-between;
+}
+.content-reviews {
+  width: 800px;
+}
+.review-list {
+  border-top: 2px solid rgba(0,0,0,0.07);
+  display: inline;
+  width: 800px;
+}
+.add-review {
+  display: flex;
   align-items: center;
 }
-
+.review-form {
+  margin-top: 20px;
+  padding-top: 20px;
+}
+.review-content {
+  text-align: right;
+}
+.error-message {
+  margin: 20px 0;
+}
+.review-form-spaces {
+  display: flex;
+  align-items: center;
+}
+.new_review {
+  text-align: center !important;
+}
