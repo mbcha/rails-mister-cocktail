@@ -4,8 +4,14 @@ function showAll() {
   const allCards = document.querySelector('.all-cards');
 
   allButton.addEventListener('click', (event) => {
-    topCards.classList.add('hidden');
-    allCards.classList.remove('hidden');
+    if (allButton.innerHTML == "View All") {
+      allButton.innerHTML = "Close";
+    }
+    else {
+      allButton.innerHTML = "View All";
+    }
+    topCards.classList.toggle('hidden');
+    allCards.classList.toggle('hidden');
   });
 };
 
