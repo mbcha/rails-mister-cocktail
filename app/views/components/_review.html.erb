@@ -1,0 +1,44 @@
+<div class="container-reviews">
+  <div class="review-title">
+    <h3>Reviews</h3>
+  </div>
+
+  <div class="reviews">
+    <div class="review-list">
+      <% if @cocktail.reviews.nil? %>
+        <h5>There are no reviews yet.</h5>
+      <% end %>
+      <ul>
+        <% @cocktail.reviews.each do |review| %>
+        <li>
+          <%= review.title.capitalize %> - <%= review.stars %>/5
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="add-review">
+      <div class="review-content">
+        <div class="error-message">
+          <% if flash[:reviews_error] %>
+          <% flash.each do |_k, value| %>
+          <div class="alert alert-error"><%= value %></div>
+          <% end %>
+          <% end %>
+        </div>
+        <button class="btn btn-danger btn-review">Add a review</button>
+      </div>
+    </div>
+
+    <div class="review-form hidden">
+      <div class="review-form-spaces">
+        <%= simple_form_for([@cocktail, Review.new]) do |f| %>
+        <%= f.input :title, label: "Comment" %>
+        <%= f.input :stars, label: "Rating", collection: 1..5 %>
+        <%= link_to "Cancel", @cocktail, class: "btn btn-primary" %>
+        <%= f.submit "Add Review", class: "btn btn-danger review-button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

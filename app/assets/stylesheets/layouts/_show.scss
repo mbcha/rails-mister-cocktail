@@ -4,22 +4,21 @@ body {
 .reviews {
   display: flex;
   justify-content: space-between;
-}
-.content-reviews {
-  width: 800px;
+  align-items: center;
+  border-top: 2px solid rgba(0,0,0,0.07);
+  padding: 30px 0;
 }
 .review-list {
-  border-top: 2px solid rgba(0,0,0,0.07);
-  display: inline;
-  width: 800px;
+  ul {
+    margin-bottom: 0;
+    padding-left: 20px;
+  }
 }
 .add-review {
   display: flex;
   align-items: center;
 }
 .review-form {
-  margin-top: 20px;
-  padding-top: 20px;
 }
 .review-content {
   text-align: right;
@@ -33,4 +32,21 @@ body {
 }
 .new_review {
   text-align: center !important;
+}
+.container-reviews {
+  background-color: rgba(255,255,255,0.3);
+  text-align: left;
+  padding: 20px 100px;
+  box-shadow: 2px 1px 5px 2px rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  border-radius: 5px;
+  width: 50vw;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+.review-title {
+  text-align: left;
+  padding: 0;
+  h3 {
+    margin-top: 0;
+  }
 }

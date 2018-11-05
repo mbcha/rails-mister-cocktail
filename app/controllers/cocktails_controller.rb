@@ -1,17 +1,21 @@
 class CocktailsController < ApplicationController
   def index
-    @cocktails = Cocktail.all
-    @cocktail = Cocktail.where(name: params[:name])
-    @results = search
+    if params[:result]
+      @ingredient = Ingredient.where(name: params[:result])
+      if @ingredient.empty?
+        @cocktails = Cocktail.where(name: params[:result])
+      else
+        @cocktails = Cocktail.joins(:doses).where(doses: { ingredient_id: @ingredient })
+      end
+      # redirect_to result_cocktails_path(params[:name])
+    else
+      @cocktails = Cocktail.all
+    end
   end
 
   def show
     @cocktail = Cocktail.find(params[:id])
-    @dose = Dose.new
-    @review = Review.new
-    if @review.stars
-      @rating = total_stars
-    end
+    @rating = total_stars
   end
 
   def new
@@ -30,8 +34,10 @@ class CocktailsController < ApplicationController
     end
   end
 
-  def search
-    Cocktail.where(name: params[:name])
+  def result
+    @ingredient = Ingredient.where(name: params[:result])
+    @cocktails = Cocktail.where(name: params[:result]).or(Cocktail.where(ingredient: params[:result]))
+
   end
 
   private
@@ -46,6 +52,7 @@ class CocktailsController < ApplicationController
     reviews.each do |review|
       rating += review.stars
     end
-    rating / reviews.count
+    rating /= reviews.count if rating.positive?
+    rating
   end
 end
